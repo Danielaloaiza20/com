@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLITECNICO CHANGE - Cambio de Moneda</title>
+    <style>
+         body {
+        font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+        background-image: url('https://www.criptonoticias.com/wp-content/uploads/2022/10/Proyecto-nuevo-1140x570.jpg');
+        background-size: 150%;
+    background-position: center;
+    color: white;
+    }
+   header {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    padding: 12px 0;
+    text-align: center;
+        }
+        nav {
+            background-color:red;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        form {
+            margin-top: 39px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 10px;
+        }
+        form label, form select, form input[type="submit"] {
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        footer {
+    background-color: rgba(0, 0, 0, 0); 
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+        }
+        #resultado {
+            margin-top: 2px;
+            padding: 10px;
+            background-color:white;
+            border-radius: 10px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>POLITECNICO CHANGE</h1>
+    </header>
+    <section>
+        <h2>Bienvenido a Politecnico Change</h2>
+        <p>Realiza el cambio de moneda fácilmente con nosotros.</p>
+        <form action="#" method="post" id="formulario">
+            <label for="tipo_moneda">Tipo de moneda:</label>
+            <select name="tipo_moneda" id="tipo_moneda">
+                <option value="EU">Euros</option>
+                <option value="USD">Dólares</option>
+                <option value="BR">Reales Brasileños</option>
+            </select>
+            <label for="monto">Ingrese el monto:</label>
+            <input type="number" id="monto" name="monto" required>
+            <input type="submit" value="Calcular">
+        </form>
+        <div id="resultado"></div>
+    </section>
+    <footer>
+        <p>&copy; 2024 POLITECNICO CHANGE. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        function formatearNumero(numero) {
+            return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var tipoMoneda = document.getElementById('tipo_moneda').value;
+            var monto = parseFloat(document.getElementById('monto').value);
+            var tasaCambio = 0; 
+            var resultado = 0;
+            var simboloMoneda = '';
+            var monedaDestino = '';
+
+            switch (tipoMoneda) {
+                case 'EU':
+                    tasaCambio = 4102; 
+                    simboloMoneda = '€';
+                    monedaDestino = 'Euros';
+                    break;
+                case 'USD':
+                    tasaCambio = 3775;
+                    simboloMoneda = '$';
+                    monedaDestino = 'Dólares';
+                    break;
+                case 'BR':
+                    tasaCambio = 752;
+                    simboloMoneda = 'R$';
+                    monedaDestino = 'Reales Brasileños';
+                    break;
+                default:
+                    break;
+            }
+
+            resultado = monto * tasaCambio;
+
+            document.getElementById('resultado').innerHTML = `<p>El monto cambiado a ${monedaDestino} es: ${simboloMoneda} ${formatearNumero(resultado.toFixed(2))}</p>`;
+        });
+    </script>
+</body>
+</html>
